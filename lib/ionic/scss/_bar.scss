@@ -34,7 +34,7 @@
          (min-resolution: 144dpi),
          (min-resolution: 1.5dppx) {
     border: none;
-    background-image: linear-gradient(0deg, $bar-default-border, $bar-default-border 50%);
+    background-image: linear-gradient(0deg, $bar-default-border, $bar-default-border 50%, transparent 50%);
     background-position: bottom;
     background-size: 100% 1px;
     background-repeat: no-repeat;
@@ -117,7 +117,7 @@
   &.bar-dark {
     @include bar-style($bar-dark-bg, $bar-dark-border, $bar-dark-text);
     &.bar-footer{
-      background-image: linear-gradient(180deg, $bar-dark-border, $bar-dark-border 50%);
+      background-image: linear-gradient(180deg, $bar-dark-border, $bar-dark-border 50%, transparent 50%);
     }
   }
 

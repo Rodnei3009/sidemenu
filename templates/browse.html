@@ -1,5 +1,259 @@
-<ion-view view-title="Browse">
-  <ion-content>
-    <h1>Browse</h1>
-  </ion-content>
-</ion-view>
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+  <title>IT Dashboard</title>
+  <meta charset="utf-8">
+  
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1" />
+    
+    <script src="assets/js/angular.min.js"></script>
+    
+    <script src="js/jquery.min.js"></script>
+    <script src="js/dashdaily.js"></script>
+    
+    <link href="http://fonts.googleapis.com/css?family=Arimo:400,700,400italic" rel="stylesheet">
+    <link href="assets/css/fonts/linecons/css/linecons.css" rel="stylesheet">
+    <link href="assets/css/fonts/fontawesome/css/font-awesome.min.css" rel="stylesheet">    
+    
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+	<link rel="stylesheet" href="assets/css/xenon-core.css">
+	<link rel="stylesheet" href="assets/css/xenon-forms.css">
+	
+    <link rel="stylesheet" href="assets/css/formater.css">
+	
+    <link rel="stylesheet" href="assets/css/xenon-skins.css">
+	<link rel="stylesheet" href="assets/css/custom.css">
+	<script src="js/jquery-1.11.1.min.js"></script>
+
+    <link href="assets/css/morris.css" rel="stylesheet">
+    
+    <!-- Bootstrap Core CSS -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+    <script src="https://cdn.firebase.com/js/client/2.2.3/firebase.js"></script>	
+    <script src="https://cdn.firebase.com/libs/angularfire/1.0.0/angularfire.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment-with-locales.min.js"></script>
+    
+
+</head>
+<body ng-controller="dashitems" ng-init="carregar(ano_mes_dia)">
+    
+        <div>
+            <br>
+            <br>
+            <br>
+        </div>
+    
+        <div class="spinnerpos" ng-show="carregou">
+            <div class="preloader1">                
+               <span></span>
+               <span></span>
+               <span></span>
+               <span></span>
+               <span></span>
+               <span></span>
+               <span></span>
+               <span></span>
+               <span></span>
+               <span></span>
+            </div>
+        </div>    
+        
+        <!--
+        <div ng-hide="carregou" > parei aqui. sem o ng-hide funciona
+        -->
+    
+        <div ng-hide="carregou">
+            
+            <div class="block-center text-center align-center col-sm-12">
+                <h3>
+                    <button type="button" class="btn btn-success btn-lg" ng-click="before()"><i class="fa fa-lg fa-chevron-circle-left"></i></button>
+                    <strong>&nbsp;{{data_exibir}}&nbsp;</strong>
+                    <button type="button" class="btn btn-success btn-lg" ng-click="after()"><i class="fa fa-lg fa-chevron-circle-right"></i></button>
+                </h3>
+            </div>
+            
+            <div class="col-sm-4">
+                <div class="xe-widget xe-counter-block" data-count=".num" data-from="0" data-to="99.9" data-suffix="%" data-duration="2">
+                    <div class="xe-upper">
+
+                        <div class="xe-icon">
+                            <i class="fa-tachometer"></i>
+                        </div>
+                        <div class="xe-label">
+                            <strong class="num">{{sla}}%</strong>
+                            <span>SLA no prazo</span>
+                        </div>
+
+                    </div>
+                    <div class="xe-lower">
+                        <div class="border"></div>
+
+                        <span>Meta</span>
+                        <strong>98% no prazo</strong>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-sm-4" ng-controller="dashitems">
+
+                <div class="xe-widget xe-counter-block xe-counter-block-purple" data-count=".num" data-from="0" data-to="512" data-duration="3">
+                    <div class="xe-upper">
+
+                        <div class="xe-icon">
+                            <i class="fa-line-chart"></i>
+                        </div>
+                        <div class="xe-label">
+                            <strong class="num">{{abertos}}</strong>
+                            <span>Volume de tickets abertos</span>
+                        </div>
+
+                    </div>
+                    <div class="xe-lower">
+                        <div class="border"></div>
+
+                        <span>Baseline mensal</span>
+                        <strong>639 tickets</strong>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-sm-4">
+                <div class="xe-widget xe-counter-block xe-counter-block-red" data-count=".num" data-from="0" data-to="99.9" data-suffix="%" data-duration="2">
+                    <div class="xe-upper">
+
+                        <div class="xe-icon">
+                            <i class="fa-thumbs-down"></i>
+                        </div>
+                        <div class="xe-label">
+                            <strong class="num">{{reabertos}}</strong>
+                            <span>Tickets reabertos</span>
+                        </div>
+                    </div>
+                    <div class="xe-lower">
+                        <div class="border"></div>
+                        <span>Meta</span>
+                        <strong>0 tickets reabertos</strong>
+                    </div>
+                </div>
+            </div>
+            
+                        <div class="col-sm-4">
+
+                <div class="xe-widget xe-counter-block xe-counter-block-yellow" data-count=".num" data-from="0" data-to="512" data-duration="3">
+                    <div class="xe-upper">
+
+                        <div class="xe-icon">
+                            <i class="linecons-attach"></i>
+                        </div>
+                        <div class="xe-label">
+                            <strong class="num">{{encerrados}}</strong>
+                            <span>Tickets encerrados no dia</span>
+                        </div>
+
+                    </div>
+                    <div class="xe-lower">
+                        <div class="border"></div>
+
+                        <span>Informação</span>
+                        <strong>Volume de tickets encerrados no dia</strong>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-sm-4">
+
+                <div class="xe-widget xe-counter-block xe-counter-block-blue" data-suffix="k" data-count=".num" data-from="0" data-to="310" data-duration="4" data-easing="false">
+                    <div class="xe-upper">
+
+                        <div class="xe-icon">
+                            <i class="fa-ban"></i>
+                        </div>
+                        <div class="xe-label">
+                            <strong class="num">{{previstos}}</strong>
+                            <span>Volume de tickets com vencimento no dia</span>
+                        </div>
+
+                    </div>
+                    <div class="xe-lower">
+                        <div class="border"></div>
+
+                        <span>Informação</span>
+                        <strong>Tickets com vencimento previsto no dia</strong>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-sm-4">
+                <div class="xe-widget xe-counter-block xe-counter-block-orange">
+                    <div class="xe-upper">
+
+                        <div class="xe-icon">
+                            <i class="fa-info-circle"></i>
+                        </div>
+                        <div class="xe-label">
+                            <strong class="num">{{no_prazo}}</strong>
+                            <span>Volume de tickets encerrados no prazo</span>
+                        </div>
+                    </div>
+                    <div class="xe-lower">
+                        <div class="border"></div>
+                        <span>Informação</span>
+                        <strong>Tickets encerrados no dia e dentro do prazo</strong>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="col-sm-6">
+                <div class="xe-widget xe-counter-block xe-counter-block-white">
+                    <div id="bar-5"></div>    
+                </div>
+            </div>
+            
+            <div class="col-sm-6">
+                <div class="xe-widget xe-counter-block xe-counter-block-white">
+                    <div id="bar-10"></div>    
+                </div>
+            </div>
+            
+            <div class="col-sm-12">
+                <div class="xe-widget xe-counter-block xe-counter-block-white">
+                    <div id="volsla"></div>    
+                </div>
+            </div>
+
+            <div>
+                <br>
+            </div>
+        </div>
+    
+        
+    
+        <!-- Bootstrap Core JavaScript -->
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/dashdaily.js"></script>
+
+        <!-- Morris Charts JavaScript -->
+        <script src="js/plugins/morris/raphael.min.js"></script>
+        <script src="js/plugins/morris/morris.min.js"></script>
+        <script src="js/plugins/morris/morris-data.js"></script>
+
+        <!-- Flot Charts JavaScript -->
+        <!--[if lte IE 8]><script src="js/excanvas.min.js"></script><![endif]-->
+        <script src="js/plugins/flot/jquery.flot.js"></script>
+        <script src="js/plugins/flot/jquery.flot.tooltip.min.js"></script>
+        <script src="js/plugins/flot/jquery.flot.resize.js"></script>
+        <script src="js/plugins/flot/jquery.flot.pie.js"></script>
+        <script src="js/plugins/flot/flot-data.js"></script>
+
+        <script src="assets/js/devexpress-web-14.1/js/globalize.min.js"></script>
+        <script src="assets/js/devexpress-web-14.1/js/dx.chartjs.js"></script>
+
+</body>
+</html>
