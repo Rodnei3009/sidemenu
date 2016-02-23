@@ -1,14 +1,25 @@
 <ion-view view-title="Search">
     <ion-content>
 
-
-
         <div ng-controller="DailyDash" ng-init="carregar(ano_mes_dia)">
-
             <br>
-
-            <div >
-                
+            
+            <div class="spinnerpos" ng-show="carregou">
+                <div class="preloader1">                
+                   <span></span>
+                   <span></span>
+                   <span></span>
+                   <span></span>
+                   <span></span>
+                   <span></span>
+                   <span></span>
+                   <span></span>
+                   <span></span>
+                   <span></span>
+                </div>
+            </div>
+            
+            <div ng-hide="carregou">
                 <div class="block-center text-center align-center col-sm-12">
                         <h3>
                             <button type="button" class="btn btn-success btn-lg" ng-click="before()"><i class="fa fa-lg fa-chevron-circle-left"></i></button>
