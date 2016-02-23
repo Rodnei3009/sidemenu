@@ -141,8 +141,7 @@ angular.module('starter.controllers', [])
                 dChartCateg._render();
     
                 $scope.$apply();
-                
-                
+                    
             });
             $scope.carregou = false;
             $scope.data_exibir = moment($scope.ano_mes_dia, "YYYYMMDD").format('DD MMMM YYYY');
