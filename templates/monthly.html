@@ -1,0 +1,158 @@
+<ion-view view-title="Dashboard Mensal">
+    <ion-content>
+
+        <div ng-controller="MonthlyDash" ng-init="carregar(ano_mes)">
+            <br>
+            
+            <div class="spinnerpos" ng-show="carregou">
+                <div class="preloader1">                
+                   <span></span>
+                   <span></span>
+                   <span></span>
+                   <span></span>
+                   <span></span>
+                   <span></span>
+                   <span></span>
+                   <span></span>
+                   <span></span>
+                   <span></span>
+                </div>
+            </div>
+            
+            <div ng-hide="carregou">
+                <div class="block-center text-center align-center col-sm-12">
+                    <h3>
+                        <button type="button" class="btn btn-success btn-lg" ng-click="before()"><i class="fa fa-lg fa-chevron-circle-left"></i></button>
+                        <strong>&nbsp;{{data_exibir}}&nbsp;</strong>
+                        <button type="button" class="btn btn-success btn-lg" ng-click="after()"><i class="fa fa-lg fa-chevron-circle-right"></i></button>
+                    </h3>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="xe-widget xe-counter-block" data-count=".num" data-from="0" data-to="99.9" data-suffix="%" data-duration="2">
+                        <div class="xe-upper">
+
+                            <div class="xe-icon">
+                                <i class="fa-tachometer"></i>
+                            </div>
+                            <div class="xe-label">
+                                <strong class="num">{{sla}}%</strong>
+                                <span>SLA no prazo</span>
+                            </div>
+
+                        </div>
+                        <div class="xe-lower">
+                            <div class="border"></div>
+
+                            <span>Meta</span>
+                            <strong>98% no prazo</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="xe-widget xe-counter-block xe-counter-block-purple" data-count=".num" data-from="0" data-to="512" data-duration="3">
+                        <div class="xe-upper">
+                            <div class="xe-icon">
+                                <i class="fa-line-chart"></i>
+                            </div>
+                            <div class="xe-label">
+                                <strong class="num">{{abertos}}</strong>
+                                <span>Volume de tickets abertos</span>
+                            </div>
+                        </div>
+                        <div class="xe-lower">
+                            <div class="border"></div>
+
+                            <span>Baseline mensal</span>
+                            <strong>639 tickets</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="xe-widget xe-counter-block xe-counter-block-red" data-count=".num" data-from="0" data-to="99.9" data-suffix="%" data-duration="2">
+                        <div class="xe-upper">
+                            <div class="xe-icon">
+                                <i class="fa-thumbs-down"></i>
+                            </div>
+                            <div class="xe-label">
+                                <strong class="num">{{reabertos}}</strong>
+                                <span>Tickets reabertos</span>
+                            </div>
+                        </div>
+                        <div class="xe-lower">
+                            <div class="border"></div>
+                            <span>Meta</span>
+                            <strong>0 tickets reabertos</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="xe-widget xe-counter-block xe-counter-block-yellow" data-count=".num" data-from="0" data-to="512" data-duration="3">
+                        <div class="xe-upper">
+
+                            <div class="xe-icon">
+                                <i class="linecons-attach"></i>
+                            </div>
+                            <div class="xe-label">
+                                <strong class="num">{{encerrados}}</strong>
+                                <span>Tickets encerrados no dia</span>
+                            </div>
+                        </div>
+                        <div class="xe-lower">
+                            <div class="border"></div>
+                            <span>Informação</span>
+                            <strong>Volume de tickets encerrados no dia</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="xe-widget xe-counter-block xe-counter-block-blue" data-suffix="k" data-count=".num" data-from="0" data-to="310" data-duration="4" data-easing="false">
+                        <div class="xe-upper">
+                            <div class="xe-icon">
+                                <i class="fa-ban"></i>
+                            </div>
+                            <div class="xe-label">
+                                <strong class="num">{{previstos}}</strong>
+                                <span>Volume de tickets com vencimento no dia</span>
+                            </div>
+                        </div>
+                        <div class="xe-lower">
+                            <div class="border"></div>
+
+                            <span>Informação</span>
+                            <strong>Tickets com vencimento previsto no dia</strong>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="xe-widget xe-counter-block xe-counter-block-orange">
+                        <div class="xe-upper">
+                            <div class="xe-icon">
+                                <i class="fa-info-circle"></i>
+                            </div>
+                            <div class="xe-label">
+                                <strong class="num">{{no_prazo}}</strong>
+                                <span>Volume de tickets encerrados no prazo</span>
+                            </div>
+                        </div>
+                        <div class="xe-lower">
+                            <div class="border"></div>
+                            <span>Informação</span>
+                            <strong>Tickets encerrados no dia e dentro do prazo</strong>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </ion-content>
+</ion-view>
+      
